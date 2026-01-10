@@ -45,7 +45,7 @@
                 <a href="https://github.com/Emmaxadel/tweet-analysis" target="_blank" class="btn btn-primary">
                     <i class="fab fa-github"></i> View on GitHub
                 </a>
-                <a href="https://github.com/Emmaxadel/tweet-analysis/blob/main/enhanced_sentiment_map_with_report_nigeria.html" target="_blank" class="btn btn-secondary">
+                <a href="#interactive-map" class="btn btn-secondary">
                     <i class="fas fa-map-marked-alt"></i> View Interactive Map
                 </a>
             </div>
@@ -89,7 +89,7 @@
     </section>
 
     <!-- Interactive Map Section -->
-    <section class="project-section dashboard-section">
+    <section id="interactive-map" class="project-section dashboard-section">
         <div class="container">
             <h2 class="section-title">Interactive Sentiment Map</h2>
             <p class="dashboard-description">
@@ -98,6 +98,15 @@
                 red for negative), with detailed statistics available for each location. Click on state markers 
                 to explore sentiment intensity, mention counts, and key findings.
             </p>
+            
+            <!-- Mobile Warning -->
+            <div class="mobile-warning" style="display: none; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 15px; margin-bottom: 20px; text-align: center;">
+                <i class="fas fa-mobile-alt" style="color: #856404; font-size: 24px; margin-bottom: 10px;"></i>
+                <p style="margin: 0; color: #856404; font-weight: 500;">
+                    <strong>Viewing on mobile?</strong> For the best experience, please switch to <strong>Desktop Mode</strong> in your browser settings or view on a larger screen.
+                </p>
+            </div>
+            
             <div class="dashboard-container">
                 <iframe 
                     src="enhanced_sentiment_map_with_report_nigeria.html" 
@@ -460,6 +469,20 @@ print(f"Negative: {len(state_sentiment[state_sentiment['average_sentiment']=='ba
                 }, 2000);
             });
         }
+        
+        // Show mobile warning for small screens
+        function checkScreenSize() {
+            const mobileWarning = document.querySelector('.mobile-warning');
+            if (mobileWarning && window.innerWidth < 768) {
+                mobileWarning.style.display = 'block';
+            } else if (mobileWarning) {
+                mobileWarning.style.display = 'none';
+            }
+        }
+        
+        // Check on load and resize
+        window.addEventListener('load', checkScreenSize);
+        window.addEventListener('resize', checkScreenSize);
     </script>
 </body>
 </html>
