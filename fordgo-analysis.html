@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fordgo Bike Analysis - Power BI & Python Data Analysis">
+    <title>Fordgo Analysis | Emmanuel Adeleye</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Emmanuel Adeleye</div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <a href="index.html#projects" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <h1 class="project-title-main">Fordgo Bike Analysis</h1>
+            <p class="project-subtitle">Comprehensive Data Analysis using Power BI & Python</p>
+            <div class="project-meta">
+                <span><i class="fas fa-calendar"></i> January 2026</span>
+                <span><i class="fas fa-tag"></i> Data Analytics, Business Intelligence</span>
+            </div>
+            <div class="project-external-links">
+                <a href="https://github.com/Emmaxadel/Fordgo-bike-analysis/tree/main" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                <a href="https://app.powerbi.com/view?r=eyJrIjoiNTg3ZjUzYjEtZjJjNS00MGNiLThhNjYtNmYwNjliMmYyODljIiwidCI6ImE0YWNiZjAwLWUyOWEtNGRiZS1iM2VjLTc4MGY0MmM1MDE3NyJ9&pageName=ReportSection2f090246a7e00edd04a6" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-external-link-alt"></i> Open Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-section">
+        <div class="container">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="project-overview-content">
+                <p>
+                    This project presents a comprehensive analysis of Fordgo bike-sharing data, combining the power of 
+                    interactive visualization through Power BI and in-depth statistical analysis using Python. The analysis 
+                    explores usage patterns, customer behavior, seasonal trends, and business performance metrics to derive 
+                    actionable insights for optimizing bike-sharing operations.
+                </p>
+                <h3>Key Objectives</h3>
+                <ul>
+                    <li>Analyze bike usage patterns across different time periods and locations</li>
+                    <li>Identify customer segments and their behavioral characteristics</li>
+                    <li>Examine seasonal and weather-related impacts on bike-sharing demand</li>
+                    <li>Develop interactive dashboards for real-time business monitoring</li>
+                    <li>Generate data-driven recommendations for operational improvements</li>
+                </ul>
+                <h3>Technologies Used</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge"><i class="fas fa-chart-bar"></i> Power BI</span>
+                    <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                    <span class="tech-badge"><i class="fas fa-table"></i> Pandas</span>
+                    <span class="tech-badge"><i class="fas fa-chart-line"></i> Matplotlib/Seaborn</span>
+                    <span class="tech-badge"><i class="fas fa-database"></i> Data Cleaning</span>
+                    <span class="tech-badge"><i class="fas fa-chart-pie"></i> Statistical Analysis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Power BI Dashboard -->
+    <section class="project-section dashboard-section">
+        <div class="container">
+            <h2 class="section-title">Interactive Power BI Dashboard</h2>
+            <p class="dashboard-description">
+                Explore the interactive dashboard below to discover insights about bike usage patterns, 
+                customer demographics, and business performance metrics. The dashboard features dynamic 
+                filtering and drill-down capabilities for detailed analysis.
+            </p>
+            <div class="dashboard-container">
+                <iframe 
+                    title="Fordgo analysis" 
+                    src="https://app.powerbi.com/view?r=eyJrIjoiNTg3ZjUzYjEtZjJjNS00MGNiLThhNjYtNmYwNjliMmYyODljIiwidCI6ImE0YWNiZjAwLWUyOWEtNGRiZS1iM2VjLTc4MGY0MmM1MDE3NyJ9&pageName=ReportSection2f090246a7e00edd04a6" 
+                    frameborder="0" 
+                    allowFullScreen="true">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Insights -->
+    <section class="project-section insights-section">
+        <div class="container">
+            <h2 class="section-title">Key Insights & Findings</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Customer Behavior</h3>
+                    <p>Identified distinct usage patterns between casual riders and registered members, with registered users showing higher frequency and consistency.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Peak Usage Times</h3>
+                    <p>Discovered peak demand during morning (7-9 AM) and evening (5-7 PM) commute hours on weekdays, with different patterns on weekends.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Seasonal Trends</h3>
+                    <p>Analyzed seasonal variations showing higher usage in spring and summer months, with weather conditions significantly impacting ridership.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location Analysis</h3>
+                    <p>Mapped high-traffic stations and routes, identifying optimal locations for bike redistribution and new station placement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Python Code Analysis -->
+    <section class="project-section code-section">
+        <div class="container">
+            <h2 class="section-title">Python Analysis Code</h2>
+            <p class="code-description">
+                Below is the Python code used for data cleaning, exploration, and statistical analysis. 
+                The code demonstrates data preprocessing, visualization, and insights generation.
+            </p>
+            
+            <div class="code-container">
+                <div class="code-header">
+                    <span><i class="fab fa-python"></i> Python</span>
+                    <button class="copy-btn" onclick="copyCode()">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                </div>
+                <pre class="code-block"><code class="language-python" id="python-code"># Fordgo Bike Analysis - Python Code
+# Data Analysis and Visualization
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
+import warnings
+warnings.filterwarnings('ignore')
+
+# Set visualization style
+sns.set_style('whitegrid')
+plt.rcParams['figure.figsize'] = (12, 6)
+
+# Load the dataset
+print("Loading Fordgo bike-sharing data...")
+df = pd.read_csv('fordgo_bike_data.csv')
+
+# Display basic information
+print("\nDataset Shape:", df.shape)
+print("\nFirst few rows:")
+print(df.head())
+
+# Data Cleaning and Preprocessing
+print("\n=== Data Cleaning ===")
+
+# Check for missing values
+print("\nMissing values:")
+print(df.isnull().sum())
+
+# Convert datetime columns
+df['date'] = pd.to_datetime(df['date'])
+df['year'] = df['date'].dt.year
+df['month'] = df['date'].dt.month
+df['day'] = df['date'].dt.day
+df['day_of_week'] = df['date'].dt.day_name()
+df['hour'] = df['date'].dt.hour
+
+# Remove duplicates
+df = df.drop_duplicates()
+print(f"\nDataset after cleaning: {df.shape}")
+
+# Exploratory Data Analysis
+print("\n=== Exploratory Data Analysis ===")
+
+# Statistical summary
+print("\nStatistical Summary:")
+print(df.describe())
+
+# 1. Usage by Hour
+print("\n1. Analyzing usage patterns by hour...")
+hourly_usage = df.groupby('hour')['count'].mean().sort_values(ascending=False)
+print("\nTop 5 peak hours:")
+print(hourly_usage.head())
+
+plt.figure(figsize=(14, 6))
+plt.subplot(1, 2, 1)
+hourly_usage.plot(kind='bar', color='steelblue')
+plt.title('Average Bike Usage by Hour', fontsize=14, fontweight='bold')
+plt.xlabel('Hour of Day')
+plt.ylabel('Average Number of Bikes')
+plt.xticks(rotation=0)
+plt.tight_layout()
+
+# 2. Usage by Day of Week
+print("\n2. Analyzing usage patterns by day of week...")
+daily_usage = df.groupby('day_of_week')['count'].mean()
+day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+daily_usage = daily_usage.reindex(day_order)
+
+plt.subplot(1, 2, 2)
+daily_usage.plot(kind='bar', color='coral')
+plt.title('Average Bike Usage by Day of Week', fontsize=14, fontweight='bold')
+plt.xlabel('Day of Week')
+plt.ylabel('Average Number of Bikes')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('usage_patterns.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+# 3. Seasonal Analysis
+print("\n3. Analyzing seasonal trends...")
+seasonal_usage = df.groupby('season')['count'].mean().sort_values(ascending=False)
+print("\nAverage usage by season:")
+print(seasonal_usage)
+
+plt.figure(figsize=(10, 6))
+seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+colors = ['#90EE90', '#FFD700', '#FF8C00', '#87CEEB']
+plt.bar(seasons, seasonal_usage.values, color=colors, edgecolor='black', linewidth=1.5)
+plt.title('Average Bike Usage by Season', fontsize=16, fontweight='bold')
+plt.xlabel('Season', fontsize=12)
+plt.ylabel('Average Number of Bikes', fontsize=12)
+plt.grid(axis='y', alpha=0.3)
+plt.tight_layout()
+plt.savefig('seasonal_analysis.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+# 4. Weather Impact Analysis
+print("\n4. Analyzing weather impact...")
+weather_usage = df.groupby('weather')['count'].mean().sort_values(ascending=False)
+print("\nAverage usage by weather condition:")
+print(weather_usage)
+
+# 5. User Type Analysis
+print("\n5. Analyzing user types...")
+if 'user_type' in df.columns:
+    user_type_stats = df.groupby('user_type')['count'].agg(['mean', 'sum', 'count'])
+    print("\nUser type statistics:")
+    print(user_type_stats)
+    
+    plt.figure(figsize=(12, 5))
+    plt.subplot(1, 2, 1)
+    user_type_stats['sum'].plot(kind='pie', autopct='%1.1f%%', startangle=90)
+    plt.title('Total Usage by User Type', fontsize=14, fontweight='bold')
+    plt.ylabel('')
+    
+    plt.subplot(1, 2, 2)
+    user_type_stats['mean'].plot(kind='bar', color=['#3498db', '#e74c3c'])
+    plt.title('Average Usage by User Type', fontsize=14, fontweight='bold')
+    plt.xlabel('User Type')
+    plt.ylabel('Average Number of Bikes')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('user_type_analysis.png', dpi=300, bbox_inches='tight')
+    plt.show()
+
+# 6. Correlation Analysis
+print("\n6. Correlation analysis...")
+numeric_cols = df.select_dtypes(include=[np.number]).columns
+correlation_matrix = df[numeric_cols].corr()
+
+plt.figure(figsize=(12, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0, 
+            square=True, linewidths=1, cbar_kws={"shrink": 0.8})
+plt.title('Correlation Matrix - Bike Usage Factors', fontsize=16, fontweight='bold')
+plt.tight_layout()
+plt.savefig('correlation_matrix.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+# 7. Monthly Trend Analysis
+print("\n7. Analyzing monthly trends...")
+monthly_trend = df.groupby(['year', 'month'])['count'].sum().reset_index()
+monthly_trend['date'] = pd.to_datetime(monthly_trend[['year', 'month']].assign(day=1))
+
+plt.figure(figsize=(14, 6))
+plt.plot(monthly_trend['date'], monthly_trend['count'], marker='o', linewidth=2, markersize=6)
+plt.title('Monthly Bike Usage Trend', fontsize=16, fontweight='bold')
+plt.xlabel('Date', fontsize=12)
+plt.ylabel('Total Number of Bikes', fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('monthly_trend.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+# Key Insights Summary
+print("\n" + "="*60)
+print("KEY INSIGHTS SUMMARY")
+print("="*60)
+print(f"\n1. Peak Usage Hour: {hourly_usage.idxmax()}:00 with avg {hourly_usage.max():.0f} bikes")
+print(f"2. Busiest Day: {daily_usage.idxmax()} with avg {daily_usage.max():.0f} bikes")
+print(f"3. Best Season: {seasonal_usage.idxmax()} with avg {seasonal_usage.max():.0f} bikes")
+print(f"4. Total Rides Analyzed: {df['count'].sum():,.0f}")
+print(f"5. Average Daily Usage: {df['count'].mean():.0f} bikes")
+print(f"6. Usage Variability (Std Dev): {df['count'].std():.0f}")
+
+# Recommendations
+print("\n" + "="*60)
+print("BUSINESS RECOMMENDATIONS")
+print("="*60)
+print("""
+1. PEAK HOUR OPTIMIZATION:
+   - Increase bike availability during morning (7-9 AM) and evening (5-7 PM) rush hours
+   - Implement dynamic pricing during peak hours to maximize revenue
+
+2. SEASONAL STRATEGY:
+   - Prepare for higher demand in spring/summer months with adequate inventory
+   - Offer promotions during low-demand winter months to maintain engagement
+
+3. USER ENGAGEMENT:
+   - Develop targeted marketing for casual users to convert them to registered members
+   - Create loyalty programs for registered users to increase retention
+
+4. OPERATIONAL EFFICIENCY:
+   - Optimize bike redistribution based on hourly and daily patterns
+   - Focus maintenance schedules during low-usage periods
+
+5. EXPANSION OPPORTUNITIES:
+   - Identify and prioritize high-demand locations for new station placement
+   - Consider weather-protected stations in areas with variable conditions
+""")
+
+print("\nAnalysis completed successfully!")
+print("All visualizations have been saved as PNG files.")
+</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="project-section recommendations-section">
+        <div class="container">
+            <h2 class="section-title">Business Recommendations</h2>
+            <div class="recommendations-list">
+                <div class="recommendation-item">
+                    <div class="recommendation-number">01</div>
+                    <div class="recommendation-content">
+                        <h3>Peak Hour Optimization</h3>
+                        <p>Increase bike availability during morning (7-9 AM) and evening (5-7 PM) rush hours. Implement dynamic pricing strategies during peak demand to maximize revenue while ensuring adequate supply.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-number">02</div>
+                    <div class="recommendation-content">
+                        <h3>Seasonal Preparation</h3>
+                        <p>Prepare for higher demand in spring and summer months with adequate bike inventory and maintenance. Offer promotional campaigns during low-demand winter periods to maintain user engagement.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-number">03</div>
+                    <div class="recommendation-content">
+                        <h3>User Conversion Strategy</h3>
+                        <p>Develop targeted marketing campaigns to convert casual users to registered members. Create loyalty programs and subscription models to increase customer lifetime value and retention rates.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-number">04</div>
+                    <div class="recommendation-content">
+                        <h3>Smart Redistribution</h3>
+                        <p>Optimize bike redistribution logistics based on identified usage patterns. Implement predictive models to anticipate demand and position bikes strategically across high-traffic stations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Emmanuel Adeleye. All rights reserved.</p>
+            <p>Built with passion for data science and discovery.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script>
+        function copyCode() {
+            const code = document.getElementById('python-code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
