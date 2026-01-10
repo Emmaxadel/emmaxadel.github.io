@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_91d5c92a18f374148e782a2ffaa691b9 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; 
+            top: 10px; left: 50%; transform: translateX(-50%);
+            width: 650px; 
+            background-color: rgba(255, 255, 255, 0.98); 
+            z-index:9999; 
+            border:3px solid #008751; 
+            border-radius: 12px; 
+            padding: 18px 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <h2 style="margin: 0; 
+                text-align: center; 
+                color: #1a472a; 
+                font-family: 'Segoe UI', Arial, sans-serif;
+                font-size: 24px;
+                font-weight: bold;
+                letter-spacing: 0.5px;">
+        Nigeria Malaria Sentiment Analysis 🦟
+    </h2>
+    <p style="margin: 8px 0 0 0; 
+              text-align: center; 
+              color: #5a6c57; 
+              font-size: 13px;
+              font-family: 'Segoe UI', Arial, sans-serif;
+              line-height: 1.4;">
+        Interactive visualization of malaria-related Twitter sentiments across Nigerian states
+    </p>
+</div>
+    
+<div style="position: fixed; top: 95px; left: 15px; width: 285px; 
+            background-color: rgba(255, 255, 255, 0.97); z-index:9999; font-size:11px;
+            border:2px solid #008751; border-radius: 10px; padding: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+            max-height: calc(100vh - 110px); overflow-y: auto;">
+    <h3 style="margin: 0 0 10px 0; color: #1a472a; border-bottom: 2px solid #008751; padding-bottom: 6px; font-size: 14px;">
+        📊 Analysis Summary
+    </h3>
+
+    <div style="margin: 8px 0; background: #f8f9fa; padding: 8px; border-radius: 6px;">
+        <p style="margin: 4px 0; font-weight: bold; color: #2c3e50; font-size: 11px;">Overview:</p>
+        <p style="margin: 2px 0; font-size: 10px;">📍 States: <strong>16</strong></p>
+        <p style="margin: 2px 0; font-size: 10px;">💬 Mentions: <strong>34</strong></p>
+        <p style="margin: 2px 0; font-size: 10px;">📈 Avg/State: <strong>2.1</strong></p>
+    </div>
+
+    <div style="margin: 10px 0; background: #f8f9fa; padding: 8px; border-radius: 6px;">
+        <p style="margin: 4px 0; font-weight: bold; color: #2c3e50; font-size: 11px;">Sentiment Distribution:</p>
+        <p style="margin: 2px 0; font-size: 10px;">
+            <span style="color: #27ae60; font-size: 14px;">●</span> <strong>5</strong> Positive
+        </p>
+        <p style="margin: 2px 0; font-size: 10px;">
+            <span style="color: #f39c12; font-size: 14px;">●</span> <strong>7</strong> Neutral
+        </p>
+        <p style="margin: 2px 0; font-size: 10px;">
+            <span style="color: #e74c3c; font-size: 14px;">●</span> <strong>4</strong> Negative
+        </p>
+    </div>
+
+    <div style="margin: 10px 0; background: #fff3cd; padding: 8px; border-left: 3px solid #f39c12; border-radius: 4px;">
+        <p style="margin: 0 0 3px 0; font-size: 10px;">
+            <span style="font-weight: bold; color: #856404;">🔥 Most Discussed:</span>
+        </p>
+        <p style="margin: 0; font-size: 10px; color: #333;">
+            <strong>LAGOS</strong> (7 mentions)
+        </p>
+    </div>
+
+    <div style="margin: 10px 0; background: #f8d7da; padding: 8px; border-left: 3px solid #e74c3c; border-radius: 4px;">
+        <p style="margin: 0 0 3px 0; font-size: 10px; font-weight: bold; color: #721c24;">
+            🚨 Needs Attention:
+        </p>
+        <p style="margin: 0; font-size: 9px; color: #555; line-height: 1.3;">
+            BAUCHI, DELTA, LAGOS, TARABA
+        </p>
+    </div>
+
+    <p style="margin: 8px 0 0 0; font-size: 9px; color: #6c757d; text-align: center; font-style: italic; border-top: 1px solid #dee2e6; padding-top: 6px;">
+        💡 Use layer controls to filter
+    </p>
+</div>
+    
+<div style="position: fixed; 
+            bottom: 30px; right: 20px; 
+            width: 200px;
+            background-color: rgba(255, 255, 255, 0.97);
+            z-index:9999;
+            border: 2px solid #008751;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);">
+    <h4 style="margin: 0 0 8px 0; color: #1a472a; font-size: 13px; border-bottom: 2px solid #008751; padding-bottom: 4px;">
+        🎨 Sentiment Legend
+    </h4>
+    <div style="margin: 6px 0; display: flex; align-items: center;">
+        <span style="display: inline-block; width: 14px; height: 14px; background-color: #27ae60; border-radius: 50%; margin-right: 8px; border: 1px solid #229954;"></span>
+        <span style="font-size: 11px; color: #2c3e50;">Positive Sentiment</span>
+    </div>
+    <div style="margin: 6px 0; display: flex; align-items: center;">
+        <span style="display: inline-block; width: 14px; height: 14px; background-color: #f39c12; border-radius: 50%; margin-right: 8px; border: 1px solid #e67e22;"></span>
+        <span style="font-size: 11px; color: #2c3e50;">Neutral Sentiment</span>
+    </div>
+    <div style="margin: 6px 0; display: flex; align-items: center;">
+        <span style="display: inline-block; width: 14px; height: 14px; background-color: #e74c3c; border-radius: 50%; margin-right: 8px; border: 1px solid #c0392b;"></span>
+        <span style="font-size: 11px; color: #2c3e50;">Negative Sentiment</span>
+    </div>
+    <p style="margin: 8px 0 0 0; font-size: 9px; color: #6c757d; font-style: italic; text-align: center; border-top: 1px solid #dee2e6; padding-top: 6px;">
+        📍 Click markers for details
+    </p>
+</div>
+    
+            <div class="folium-map" id="map_91d5c92a18f374148e782a2ffaa691b9" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_91d5c92a18f374148e782a2ffaa691b9 = L.map(
+                "map_91d5c92a18f374148e782a2ffaa691b9",
+                {
+                    center: [9.082, 8.6753],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3116894a9b4cd4025d5858540396d27f = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3116894a9b4cd4025d5858540396d27f.addTo(map_91d5c92a18f374148e782a2ffaa691b9);
+        
+    
+            var feature_group_e62f27d73bba80033485afaa71f3e087 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_f52602088008c32156e06661e2b6a3be = L.marker(
+                [6.1495, 6.7873],
+                {
+}
+            ).addTo(feature_group_e62f27d73bba80033485afaa71f3e087);
+        
+    
+            var icon_8b1f30fac9b5d80f27708d7df3754e74 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d0e5ba2e9f371a11c9454685d597fcb6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_74b26b115edec213d5350f0cb152ced6 = $(`<div id="html_74b26b115edec213d5350f0cb152ced6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #27ae60 0%, #27ae60dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 ANAMBRA             </h4>         </div>          <div style="background: #d5f4e6; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #27ae60;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #27ae60; font-size: 15px; font-weight: bold;">                     GOOD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>✅ <b>Good:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_d0e5ba2e9f371a11c9454685d597fcb6.setContent(html_74b26b115edec213d5350f0cb152ced6);
+            
+        
+
+        marker_f52602088008c32156e06661e2b6a3be.bindPopup(popup_d0e5ba2e9f371a11c9454685d597fcb6)
+        ;
+
+        
+    
+    
+            marker_f52602088008c32156e06661e2b6a3be.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>ANAMBRA</b><br>
+        <span style='color: #27ae60;'>● Sentiment: <b>Good</b> 😊</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>1.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f52602088008c32156e06661e2b6a3be.setIcon(icon_8b1f30fac9b5d80f27708d7df3754e74);
+            
+    
+            var marker_3ffe18fae9936a4a94e8865f76465ef3 = L.marker(
+                [11.8311, 13.151],
+                {
+}
+            ).addTo(feature_group_e62f27d73bba80033485afaa71f3e087);
+        
+    
+            var icon_e018e4db8463cec45df26b3b8740cf19 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_065b4c0822c491de66038e78f2290745 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7bc995a6a7f9cf9d8d758306a4c068b0 = $(`<div id="html_7bc995a6a7f9cf9d8d758306a4c068b0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #27ae60 0%, #27ae60dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 BORNO             </h4>         </div>          <div style="background: #d5f4e6; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #27ae60;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #27ae60; font-size: 15px; font-weight: bold;">                     GOOD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>✅ <b>Good:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_065b4c0822c491de66038e78f2290745.setContent(html_7bc995a6a7f9cf9d8d758306a4c068b0);
+            
+        
+
+        marker_3ffe18fae9936a4a94e8865f76465ef3.bindPopup(popup_065b4c0822c491de66038e78f2290745)
+        ;
+
+        
+    
+    
+            marker_3ffe18fae9936a4a94e8865f76465ef3.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>BORNO</b><br>
+        <span style='color: #27ae60;'>● Sentiment: <b>Good</b> 😊</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>1.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3ffe18fae9936a4a94e8865f76465ef3.setIcon(icon_e018e4db8463cec45df26b3b8740cf19);
+            
+    
+            var marker_6b107a2a8df8e49a1b615ff820645403 = L.marker(
+                [7.719, 5.311],
+                {
+}
+            ).addTo(feature_group_e62f27d73bba80033485afaa71f3e087);
+        
+    
+            var icon_e73f6af49ce98a4408a26c965d60407a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b3662e447beb93c427c6f1c12b349116 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_aa9041d5de42f84041c4935dfaa17839 = $(`<div id="html_aa9041d5de42f84041c4935dfaa17839" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #27ae60 0%, #27ae60dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 EKITI             </h4>         </div>          <div style="background: #d5f4e6; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #27ae60;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #27ae60; font-size: 15px; font-weight: bold;">                     GOOD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 2</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>✅ <b>Good:</b> 1 mention</div><div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_b3662e447beb93c427c6f1c12b349116.setContent(html_aa9041d5de42f84041c4935dfaa17839);
+            
+        
+
+        marker_6b107a2a8df8e49a1b615ff820645403.bindPopup(popup_b3662e447beb93c427c6f1c12b349116)
+        ;
+
+        
+    
+    
+            marker_6b107a2a8df8e49a1b615ff820645403.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>EKITI</b><br>
+        <span style='color: #27ae60;'>● Sentiment: <b>Good</b> 😊</span><br>
+        💬 Mentions: <b>2</b><br>
+        📊 Intensity: <b>0.5</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6b107a2a8df8e49a1b615ff820645403.setIcon(icon_e73f6af49ce98a4408a26c965d60407a);
+            
+    
+            var marker_129f3e62d891c9ce5054362c6c5b829c = L.marker(
+                [12.2289, 9.5616],
+                {
+}
+            ).addTo(feature_group_e62f27d73bba80033485afaa71f3e087);
+        
+    
+            var icon_12fee61d124bd38a59079438a818c45f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a98d9d0823278e1f75154924ca7b81a7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_81614beaefd3fcdeb3261e2d7deb16a0 = $(`<div id="html_81614beaefd3fcdeb3261e2d7deb16a0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #27ae60 0%, #27ae60dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 JIGAWA             </h4>         </div>          <div style="background: #d5f4e6; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #27ae60;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #27ae60; font-size: 15px; font-weight: bold;">                     GOOD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 4</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>✅ <b>Good:</b> 1 mention</div><div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 3 mentions</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_a98d9d0823278e1f75154924ca7b81a7.setContent(html_81614beaefd3fcdeb3261e2d7deb16a0);
+            
+        
+
+        marker_129f3e62d891c9ce5054362c6c5b829c.bindPopup(popup_a98d9d0823278e1f75154924ca7b81a7)
+        ;
+
+        
+    
+    
+            marker_129f3e62d891c9ce5054362c6c5b829c.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>JIGAWA</b><br>
+        <span style='color: #27ae60;'>● Sentiment: <b>Good</b> 😊</span><br>
+        💬 Mentions: <b>4</b><br>
+        📊 Intensity: <b>0.25</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_129f3e62d891c9ce5054362c6c5b829c.setIcon(icon_12fee61d124bd38a59079438a818c45f);
+            
+    
+            var marker_9672e90e6c60afffab8eb3812db9b8ed = L.marker(
+                [7.897766666666667, 3.7262],
+                {
+}
+            ).addTo(feature_group_e62f27d73bba80033485afaa71f3e087);
+        
+    
+            var icon_a58b418c72c44be81c7349cf8b882958 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_28469eb0f48586881fcd38e954f79c1a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_339c5dd9e7cfb6860dbc90fe8cf57cc1 = $(`<div id="html_339c5dd9e7cfb6860dbc90fe8cf57cc1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #27ae60 0%, #27ae60dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 OYO             </h4>         </div>          <div style="background: #d5f4e6; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #27ae60;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #27ae60; font-size: 15px; font-weight: bold;">                     GOOD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 3</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>❌ <b>Bad:</b> 1 mention</div><div style='margin: 4px 0;'>✅ <b>Good:</b> 2 mentions</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_28469eb0f48586881fcd38e954f79c1a.setContent(html_339c5dd9e7cfb6860dbc90fe8cf57cc1);
+            
+        
+
+        marker_9672e90e6c60afffab8eb3812db9b8ed.bindPopup(popup_28469eb0f48586881fcd38e954f79c1a)
+        ;
+
+        
+    
+    
+            marker_9672e90e6c60afffab8eb3812db9b8ed.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>OYO</b><br>
+        <span style='color: #27ae60;'>● Sentiment: <b>Good</b> 😊</span><br>
+        💬 Mentions: <b>3</b><br>
+        📊 Intensity: <b>0.33</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9672e90e6c60afffab8eb3812db9b8ed.setIcon(icon_a58b418c72c44be81c7349cf8b882958);
+            
+    
+            feature_group_e62f27d73bba80033485afaa71f3e087.addTo(map_91d5c92a18f374148e782a2ffaa691b9);
+        
+    
+            var feature_group_7c2d083bc138a70382d57d9738e544aa = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_53cd09a53ede652d5edfbf89b6cf9464 = L.marker(
+                [5.4527, 7.5248],
+                {
+}
+            ).addTo(feature_group_7c2d083bc138a70382d57d9738e544aa);
+        
+    
+            var icon_05441641c111d3e53a4e5fedad2eb3e8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "beige",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_040f365572c6e28590540aa41b5fc344 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e9183399965fe43d955106d4c4c25e1a = $(`<div id="html_e9183399965fe43d955106d4c4c25e1a" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #f39c12 0%, #f39c12dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 ABIA             </h4>         </div>          <div style="background: #fef5e7; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f39c12;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #f39c12; font-size: 15px; font-weight: bold;">                     NEUTRAL                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 4</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>❌ <b>Bad:</b> 1 mention</div><div style='margin: 4px 0;'>✅ <b>Good:</b> 1 mention</div><div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 2 mentions</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_040f365572c6e28590540aa41b5fc344.setContent(html_e9183399965fe43d955106d4c4c25e1a);
+            
+        
+
+        marker_53cd09a53ede652d5edfbf89b6cf9464.bindPopup(popup_040f365572c6e28590540aa41b5fc344)
+        ;
+
+        
+    
+    
+            marker_53cd09a53ede652d5edfbf89b6cf9464.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>ABIA</b><br>
+        <span style='color: #f39c12;'>● Sentiment: <b>Neutral</b> 😐</span><br>
+        💬 Mentions: <b>4</b><br>
+        📊 Intensity: <b>0.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_53cd09a53ede652d5edfbf89b6cf9464.setIcon(icon_05441641c111d3e53a4e5fedad2eb3e8);
+            
+    
+            var marker_1581762e24e4b4f9ed9029fd070cbaa4 = L.marker(
+                [6.4848, 5.76895],
+                {
+}
+            ).addTo(feature_group_7c2d083bc138a70382d57d9738e544aa);
+        
+    
+            var icon_c3130c4a0b22ecc9e26991ededae26ba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "beige",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d54547e5b8e25f1d6f0aff5a8e919f60 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_542dc822e90161009bdec42d271e88cf = $(`<div id="html_542dc822e90161009bdec42d271e88cf" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #f39c12 0%, #f39c12dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 EDO             </h4>         </div>          <div style="background: #fef5e7; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f39c12;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #f39c12; font-size: 15px; font-weight: bold;">                     NEUTRAL                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 2</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 2 mentions</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_d54547e5b8e25f1d6f0aff5a8e919f60.setContent(html_542dc822e90161009bdec42d271e88cf);
+            
+        
+
+        marker_1581762e24e4b4f9ed9029fd070cbaa4.bindPopup(popup_d54547e5b8e25f1d6f0aff5a8e919f60)
+        ;
+
+        
+    
+    
+            marker_1581762e24e4b4f9ed9029fd070cbaa4.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>EDO</b><br>
+        <span style='color: #f39c12;'>● Sentiment: <b>Neutral</b> 😐</span><br>
+        💬 Mentions: <b>2</b><br>
+        📊 Intensity: <b>0.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1581762e24e4b4f9ed9029fd070cbaa4.setIcon(icon_c3130c4a0b22ecc9e26991ededae26ba);
+            
+    
+            var marker_b8c14813d01ca97aefcb5c15fda388d0 = L.marker(
+                [12.4539, 4.1994],
+                {
+}
+            ).addTo(feature_group_7c2d083bc138a70382d57d9738e544aa);
+        
+    
+            var icon_90b9b44b2f444a57381c9c32bc3a56a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "beige",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a4acfa5276fc41ee10fcbe1898209f3a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e850f6584dd58303dd20d5181429d22d = $(`<div id="html_e850f6584dd58303dd20d5181429d22d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #f39c12 0%, #f39c12dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 KEBBI             </h4>         </div>          <div style="background: #fef5e7; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f39c12;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #f39c12; font-size: 15px; font-weight: bold;">                     NEUTRAL                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_a4acfa5276fc41ee10fcbe1898209f3a.setContent(html_e850f6584dd58303dd20d5181429d22d);
+            
+        
+
+        marker_b8c14813d01ca97aefcb5c15fda388d0.bindPopup(popup_a4acfa5276fc41ee10fcbe1898209f3a)
+        ;
+
+        
+    
+    
+            marker_b8c14813d01ca97aefcb5c15fda388d0.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>KEBBI</b><br>
+        <span style='color: #f39c12;'>● Sentiment: <b>Neutral</b> 😐</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>0.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b8c14813d01ca97aefcb5c15fda388d0.setIcon(icon_90b9b44b2f444a57381c9c32bc3a56a7);
+            
+    
+            var marker_4771d19d1ee3442e81b7944f67a18b37 = L.marker(
+                [8.967, 4.3828],
+                {
+}
+            ).addTo(feature_group_7c2d083bc138a70382d57d9738e544aa);
+        
+    
+            var icon_5f4f5946187d379e99b1e875a19a229a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "beige",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_11164e7520906eed7a582267e93ef3ca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b6ecb1abbb8d51459cc599ca2f1a3b04 = $(`<div id="html_b6ecb1abbb8d51459cc599ca2f1a3b04" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #f39c12 0%, #f39c12dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 KWARA             </h4>         </div>          <div style="background: #fef5e7; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f39c12;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #f39c12; font-size: 15px; font-weight: bold;">                     NEUTRAL                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 2</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 2 mentions</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_11164e7520906eed7a582267e93ef3ca.setContent(html_b6ecb1abbb8d51459cc599ca2f1a3b04);
+            
+        
+
+        marker_4771d19d1ee3442e81b7944f67a18b37.bindPopup(popup_11164e7520906eed7a582267e93ef3ca)
+        ;
+
+        
+    
+    
+            marker_4771d19d1ee3442e81b7944f67a18b37.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>KWARA</b><br>
+        <span style='color: #f39c12;'>● Sentiment: <b>Neutral</b> 😐</span><br>
+        💬 Mentions: <b>2</b><br>
+        📊 Intensity: <b>0.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4771d19d1ee3442e81b7944f67a18b37.setIcon(icon_5f4f5946187d379e99b1e875a19a229a);
+            
+    
+            var marker_2608ce8de609f38754cec8d867460a53 = L.marker(
+                [8.54, 8.497],
+                {
+}
+            ).addTo(feature_group_7c2d083bc138a70382d57d9738e544aa);
+        
+    
+            var icon_99662624cdb5174e2b403f244b1fd58d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "beige",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_67b6ca205d5c4e778ff27a690b35b9bb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_77cadb04530041641bbc885808a7136f = $(`<div id="html_77cadb04530041641bbc885808a7136f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #f39c12 0%, #f39c12dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 NASARAWA             </h4>         </div>          <div style="background: #fef5e7; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f39c12;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #f39c12; font-size: 15px; font-weight: bold;">                     NEUTRAL                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_67b6ca205d5c4e778ff27a690b35b9bb.setContent(html_77cadb04530041641bbc885808a7136f);
+            
+        
+
+        marker_2608ce8de609f38754cec8d867460a53.bindPopup(popup_67b6ca205d5c4e778ff27a690b35b9bb)
+        ;
+
+        
+    
+    
+            marker_2608ce8de609f38754cec8d867460a53.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>NASARAWA</b><br>
+        <span style='color: #f39c12;'>● Sentiment: <b>Neutral</b> 😐</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>0.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2608ce8de609f38754cec8d867460a53.setIcon(icon_99662624cdb5174e2b403f244b1fd58d);
+            
+    
+            var marker_02479eb7fc1281a07cd2b9167d19e125 = L.marker(
+                [7.253550000000001, 5.2004],
+                {
+}
+            ).addTo(feature_group_7c2d083bc138a70382d57d9738e544aa);
+        
+    
+            var icon_c45eb026233771e1262c0b98fd62b02f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "beige",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1fbaff6a6d7ef161ee0d0beffc153ad6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_142eb657a44489d7f20dddfd05a4c88c = $(`<div id="html_142eb657a44489d7f20dddfd05a4c88c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #f39c12 0%, #f39c12dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 ONDO             </h4>         </div>          <div style="background: #fef5e7; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f39c12;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #f39c12; font-size: 15px; font-weight: bold;">                     NEUTRAL                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 2</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 2 mentions</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_1fbaff6a6d7ef161ee0d0beffc153ad6.setContent(html_142eb657a44489d7f20dddfd05a4c88c);
+            
+        
+
+        marker_02479eb7fc1281a07cd2b9167d19e125.bindPopup(popup_1fbaff6a6d7ef161ee0d0beffc153ad6)
+        ;
+
+        
+    
+    
+            marker_02479eb7fc1281a07cd2b9167d19e125.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>ONDO</b><br>
+        <span style='color: #f39c12;'>● Sentiment: <b>Neutral</b> 😐</span><br>
+        💬 Mentions: <b>2</b><br>
+        📊 Intensity: <b>0.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_02479eb7fc1281a07cd2b9167d19e125.setIcon(icon_c45eb026233771e1262c0b98fd62b02f);
+            
+    
+            var marker_e23202480897e44d3c51848d590190ef = L.marker(
+                [12.1703, 6.6594],
+                {
+}
+            ).addTo(feature_group_7c2d083bc138a70382d57d9738e544aa);
+        
+    
+            var icon_6d4bb321afbff161232a9b3db9c5fd52 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "beige",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cb7cfd00e91b63504aa813ed838db9b9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8941f557e154cc42d62bf41090bb56cb = $(`<div id="html_8941f557e154cc42d62bf41090bb56cb" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #f39c12 0%, #f39c12dd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 ZAMFARA             </h4>         </div>          <div style="background: #fef5e7; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f39c12;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #f39c12; font-size: 15px; font-weight: bold;">                     NEUTRAL                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_cb7cfd00e91b63504aa813ed838db9b9.setContent(html_8941f557e154cc42d62bf41090bb56cb);
+            
+        
+
+        marker_e23202480897e44d3c51848d590190ef.bindPopup(popup_cb7cfd00e91b63504aa813ed838db9b9)
+        ;
+
+        
+    
+    
+            marker_e23202480897e44d3c51848d590190ef.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>ZAMFARA</b><br>
+        <span style='color: #f39c12;'>● Sentiment: <b>Neutral</b> 😐</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>0.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e23202480897e44d3c51848d590190ef.setIcon(icon_6d4bb321afbff161232a9b3db9c5fd52);
+            
+    
+            feature_group_7c2d083bc138a70382d57d9738e544aa.addTo(map_91d5c92a18f374148e782a2ffaa691b9);
+        
+    
+            var feature_group_9a3c5970a78d7ae86d9451895ce17a40 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_441ccf1899c02cffb72026cdf9b078f1 = L.marker(
+                [10.3158, 9.8442],
+                {
+}
+            ).addTo(feature_group_9a3c5970a78d7ae86d9451895ce17a40);
+        
+    
+            var icon_23d1310189c92d0899073c4638aa901f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9886a9c0b3184d68c5de6e24a903dacd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d0087134b9582cda4fdff14fc003ed09 = $(`<div id="html_d0087134b9582cda4fdff14fc003ed09" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #e74c3c 0%, #e74c3cdd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 BAUCHI             </h4>         </div>          <div style="background: #fadbd8; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #e74c3c;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #e74c3c; font-size: 15px; font-weight: bold;">                     BAD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>❌ <b>Bad:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_9886a9c0b3184d68c5de6e24a903dacd.setContent(html_d0087134b9582cda4fdff14fc003ed09);
+            
+        
+
+        marker_441ccf1899c02cffb72026cdf9b078f1.bindPopup(popup_9886a9c0b3184d68c5de6e24a903dacd)
+        ;
+
+        
+    
+    
+            marker_441ccf1899c02cffb72026cdf9b078f1.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>BAUCHI</b><br>
+        <span style='color: #e74c3c;'>● Sentiment: <b>Bad</b> 😟</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>1.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_441ccf1899c02cffb72026cdf9b078f1.setIcon(icon_23d1310189c92d0899073c4638aa901f);
+            
+    
+            var marker_fc80595d97416e0f64be20ab6c2f8455 = L.marker(
+                [5.6809, 5.9167],
+                {
+}
+            ).addTo(feature_group_9a3c5970a78d7ae86d9451895ce17a40);
+        
+    
+            var icon_ae4c5f7b0614d77341cb10757f9b63e3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5452faf7e35958e405ce8f0a112f5b01 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c6ccae8bee872fcdd6078446b544ebb1 = $(`<div id="html_c6ccae8bee872fcdd6078446b544ebb1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #e74c3c 0%, #e74c3cdd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 DELTA             </h4>         </div>          <div style="background: #fadbd8; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #e74c3c;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #e74c3c; font-size: 15px; font-weight: bold;">                     BAD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>❌ <b>Bad:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_5452faf7e35958e405ce8f0a112f5b01.setContent(html_c6ccae8bee872fcdd6078446b544ebb1);
+            
+        
+
+        marker_fc80595d97416e0f64be20ab6c2f8455.bindPopup(popup_5452faf7e35958e405ce8f0a112f5b01)
+        ;
+
+        
+    
+    
+            marker_fc80595d97416e0f64be20ab6c2f8455.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>DELTA</b><br>
+        <span style='color: #e74c3c;'>● Sentiment: <b>Bad</b> 😟</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>1.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fc80595d97416e0f64be20ab6c2f8455.setIcon(icon_ae4c5f7b0614d77341cb10757f9b63e3);
+            
+    
+            var marker_e4970be15852ce0f8fb8e8a4dc1728a1 = L.marker(
+                [6.520471428571428, 3.3798285714285714],
+                {
+}
+            ).addTo(feature_group_9a3c5970a78d7ae86d9451895ce17a40);
+        
+    
+            var icon_64b53b3fc32e7de9f212df4f1898b8cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_22ed3242c1b607892abfe78debce4478 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e99cf9fca02b4237d25c4278473447ca = $(`<div id="html_e99cf9fca02b4237d25c4278473447ca" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #e74c3c 0%, #e74c3cdd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 LAGOS             </h4>         </div>          <div style="background: #fadbd8; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #e74c3c;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #e74c3c; font-size: 15px; font-weight: bold;">                     BAD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 7</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>❌ <b>Bad:</b> 3 mentions</div><div style='margin: 4px 0;'>✅ <b>Good:</b> 1 mention</div><div style='margin: 4px 0;'>⚪ <b>Neutral:</b> 3 mentions</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_22ed3242c1b607892abfe78debce4478.setContent(html_e99cf9fca02b4237d25c4278473447ca);
+            
+        
+
+        marker_e4970be15852ce0f8fb8e8a4dc1728a1.bindPopup(popup_22ed3242c1b607892abfe78debce4478)
+        ;
+
+        
+    
+    
+            marker_e4970be15852ce0f8fb8e8a4dc1728a1.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>LAGOS</b><br>
+        <span style='color: #e74c3c;'>● Sentiment: <b>Bad</b> 😟</span><br>
+        💬 Mentions: <b>7</b><br>
+        📊 Intensity: <b>0.29</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e4970be15852ce0f8fb8e8a4dc1728a1.setIcon(icon_64b53b3fc32e7de9f212df4f1898b8cc);
+            
+    
+            var marker_92e53463b40ffd2a539ab121cbf9b862 = L.marker(
+                [7.9999, 10.7739],
+                {
+}
+            ).addTo(feature_group_9a3c5970a78d7ae86d9451895ce17a40);
+        
+    
+            var icon_f1d2c4dc18e4c1dd1ebd72c97b0c872c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d65c9865abf1ffe786c895b16af8d91f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1f696e72627fc990b81c48db3e58af47 = $(`<div id="html_1f696e72627fc990b81c48db3e58af47" style="width: 100.0%; height: 100.0%;">     <div style="font-family: 'Segoe UI', Arial, sans-serif; width: 260px; padding: 5px;">         <div style="background: linear-gradient(135deg, #e74c3c 0%, #e74c3cdd 100%);                      color: white; padding: 12px; border-radius: 8px 8px 0 0; margin: -5px -5px 10px -5px;">             <h4 style="margin: 0; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">                 📍 TARABA             </h4>         </div>          <div style="background: #fadbd8; padding: 10px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #e74c3c;">             <p style="margin: 0; font-size: 13px;">                 <b>Overall Sentiment:</b><br>                 <span style="color: #e74c3c; font-size: 15px; font-weight: bold;">                     BAD                 </span>             </p>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 10px;">             <p style="margin: 0 0 5px 0; font-size: 12px;"><b>💬 Total Mentions: 1</b></p>         </div>          <div style="background: white; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px;">             <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #2c3e50;">📊 Breakdown:</p>             <div style="font-size: 11px; line-height: 1.6;">                 <div style='margin: 4px 0;'>❌ <b>Bad:</b> 1 mention</div>             </div>         </div>     </div>     </div>`)[0];
+                popup_d65c9865abf1ffe786c895b16af8d91f.setContent(html_1f696e72627fc990b81c48db3e58af47);
+            
+        
+
+        marker_92e53463b40ffd2a539ab121cbf9b862.bindPopup(popup_d65c9865abf1ffe786c895b16af8d91f)
+        ;
+
+        
+    
+    
+            marker_92e53463b40ffd2a539ab121cbf9b862.bindTooltip(
+                `<div>
+                     <div style='font-family: Arial; font-size: 12px;'>
+        <b style='font-size: 13px;'>TARABA</b><br>
+        <span style='color: #e74c3c;'>● Sentiment: <b>Bad</b> 😟</span><br>
+        💬 Mentions: <b>1</b><br>
+        📊 Intensity: <b>1.0</b>
+    </div>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_92e53463b40ffd2a539ab121cbf9b862.setIcon(icon_f1d2c4dc18e4c1dd1ebd72c97b0c872c);
+            
+    
+            feature_group_9a3c5970a78d7ae86d9451895ce17a40.addTo(map_91d5c92a18f374148e782a2ffaa691b9);
+        
+    
+            var layer_control_bbf25eadc1db8b925f2e81bc9f29d4bc_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_3116894a9b4cd4025d5858540396d27f,
+                },
+                overlays :  {
+                    "\ud83d\udfe2 Positive Sentiment" : feature_group_e62f27d73bba80033485afaa71f3e087,
+                    "\ud83d\udfe4 Neutral Sentiment" : feature_group_7c2d083bc138a70382d57d9738e544aa,
+                    "\ud83d\udd34 Negative Sentiment" : feature_group_9a3c5970a78d7ae86d9451895ce17a40,
+                },
+            };
+            let layer_control_bbf25eadc1db8b925f2e81bc9f29d4bc = L.control.layers(
+                layer_control_bbf25eadc1db8b925f2e81bc9f29d4bc_layers.base_layers,
+                layer_control_bbf25eadc1db8b925f2e81bc9f29d4bc_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_91d5c92a18f374148e782a2ffaa691b9);
+
+        
+</script>
+</html>
