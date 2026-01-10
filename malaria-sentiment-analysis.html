@@ -98,16 +98,16 @@
                 red for negative), with detailed statistics available for each location. Click on state markers 
                 to explore sentiment intensity, mention counts, and key findings.
             </p>
-            <div class="dashboard-container" style="text-align: center; padding: 40px;">
-                <a href="https://github.com/Emmaxadel/tweet-analysis/blob/main/enhanced_sentiment_map_with_report_nigeria.html" 
-                   target="_blank" 
-                   class="btn btn-primary" 
-                   style="font-size: 18px; padding: 15px 30px;">
-                    <i class="fas fa-map-marked-alt"></i> View Full Interactive Map
-                </a>
-                <p style="margin-top: 20px; color: #666;">
-                    <i class="fas fa-info-circle"></i> The interactive map opens in a new window with full features including 
-                    state-level sentiment details, zoom controls, and comprehensive analysis summary.
+            <div class="dashboard-container">
+                <iframe 
+                    src="https://emmaxadel.github.io/tweet-analysis/enhanced_sentiment_map_with_report_nigeria.html" 
+                    frameborder="0" 
+                    style="width: 100%; height: 600px; border: 2px solid #ddd; border-radius: 8px;"
+                    allowFullScreen="true">
+                </iframe>
+                <p style="margin-top: 15px; text-align: center; color: #666;">
+                    <i class="fas fa-info-circle"></i> Interactive map showing sentiment analysis across Nigerian states. 
+                    Use zoom controls and click markers for detailed information.
                 </p>
             </div>
         </div>
@@ -192,162 +192,73 @@
         <div class="container">
             <h2 class="section-title">Python Analysis Code</h2>
             <p class="code-description">
-                Below is the Python code demonstrating the complete workflow: web scraping, NER, sentiment analysis, 
-                and geospatial visualization. The code showcases data preprocessing, VADER sentiment classification, 
-                and interactive map generation using Folium.
+                Below are key highlights from the Python code demonstrating the workflow: web scraping, NER, 
+                sentiment analysis, and geospatial visualization. The complete code is available on GitHub.
             </p>
             
             <div class="code-container">
                 <div class="code-header">
-                    <span><i class="fab fa-python"></i> Python</span>
+                    <span><i class="fab fa-python"></i> Python - Key Highlights</span>
                     <button class="copy-btn" onclick="copyCode()">
                         <i class="fas fa-copy"></i> Copy Code
                     </button>
                 </div>
-                <pre class="code-block"><code class="language-python" id="python-code"># Nigeria Malaria Sentiment Analysis - Python Code
+                <pre class="code-block"><code class="language-python" id="python-code"># Nigeria Malaria Sentiment Analysis - Key Code Highlights
 # Twitter Data Scraping, NLP, and Geospatial Visualization
 
 import pandas as pd
 import nltk
 from nltk import ne_chunk, pos_tag, word_tokenize
-from nltk.tree import Tree
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import folium
-from folium.plugins import MarkerCluster
 import re
 
 # ============================================
-# PART 1: DATA COLLECTION (Twitter Scraping)
+# 1. DATA COLLECTION (Twitter Scraping)
 # ============================================
+from twikit import Client
 
-from twikit import Client, TooManyRequests
-import time
-from datetime import datetime
-import csv
-from configparser import ConfigParser
-
-# Query configuration
-QUERY = '(malaria OR mosquito OR mosquitoes) (from:MobilePunch OR from:TheNationNews OR from:GuardianNigeria OR from:nigeriantribune OR from:vanguardngrnews OR from:DailyPostNGR OR from:thesunnigeria) since:2023-09-01'
-
-# Authenticate to Twitter
+QUERY = '(malaria OR mosquito OR mosquitoes) (from:MobilePunch OR from:TheNationNews...) since:2023-09-01'
 client = Client(language='en-US')
-# Login credentials loaded from config file
-# client.login(auth_info_1=username, auth_info_2=email, password=password)
-
-print("Scraping malaria-related tweets from Nigerian news sources...")
+# Scrape tweets from Nigerian news sources...
 
 # ============================================
-# PART 2: LOAD AND EXPLORE DATA
+# 2. LOCATION EXTRACTION (NER)
 # ============================================
-
-# Load scraped Twitter data
-df = pd.read_csv("twitter_data.csv")
-print(f"Dataset loaded: {df.shape[0]} tweets")
-print("\nFirst few rows:")
-print(df.head())
-
-# Check for missing values
-print("\nMissing values:")
-print(df.isnull().sum())
-
-# ============================================
-# PART 3: LOCATION EXTRACTION (NER)
-# ============================================
-
-print("\n=== Extracting Location Entities ===")
-
-# Function to extract locations using NLTK's NER
 def extract_locations(text):
-    try:
-        tokens = word_tokenize(text)
-        pos_tags = pos_tag(tokens)
-        chunks = ne_chunk(pos_tags, binary=False)
-        
-        locations = []
-        for chunk in chunks:
-            if isinstance(chunk, Tree) and chunk.label() == 'GPE':
-                locations.append(' '.join([token for token, pos in chunk.leaves()]))
-        return locations
-    except:
-        return []
+    """Extract location entities using NLTK's Named Entity Recognition"""
+    tokens = word_tokenize(text)
+    pos_tags = pos_tag(tokens)
+    chunks = ne_chunk(pos_tags, binary=False)
+    
+    locations = []
+    for chunk in chunks:
+        if isinstance(chunk, Tree) and chunk.label() == 'GPE':
+            locations.append(' '.join([token for token, pos in chunk.leaves()]))
+    return locations
 
-# Apply location extraction
 df['extracted_locations'] = df['Text'].apply(extract_locations)
 
-# List of irrelevant terms to filter out
-irrelevant_terms = {
-    "malaria", "mosquitoes", "mosquito", "untreatable", "n20bn", 
-    "burna", "yhemolee", "nddc", "otedola", "ui", "us", 
-    "east africa", "kenya"
-}
-
-# Function to clean extracted locations
-def clean_locations(locations):
-    clean_locs = []
-    for loc in locations:
-        # Ignore irrelevant terms
-        if loc.lower() in irrelevant_terms:
-            continue
-        
-        # Ignore URLs
-        if re.match(r"http[s]?://", loc):
-            continue
-        
-        # Ignore single characters
-        if len(loc) <= 1:
-            continue
-        
-        # Add cleaned location
-        clean_locs.append(loc)
-    
-    return clean_locs if clean_locs else None
-
-# Clean the extracted locations
-df['cleaned_locations'] = df['extracted_locations'].apply(clean_locations)
-
-# Handle location variations and normalize
-df['cleaned_locations'] = df['cleaned_locations'].astype(str)
-df['cleaned_locations'].replace({
-    "Lagos, Nigeria": "['Lagos']", 
-    "['Lagos, Nigeria']": "['Lagos']"
-}, inplace=True)
-
-# Convert to uppercase for consistency
-df['cleaned_locations'] = df['cleaned_locations'].str.upper()
-
-print("\nLocation extraction complete!")
-print(f"Found locations in {df['cleaned_locations'].notna().sum()} tweets")
-
 # ============================================
-# PART 4: TEXT CLEANING
+# 3. TEXT CLEANING
 # ============================================
-
-print("\n=== Cleaning Tweet Text ===")
-
-# Function to clean tweet text
 def clean_text(text):
-    text = re.sub(r'http\S+', '', text)  # Remove URLs
-    text = re.sub(r'@\w+', '', text)  # Remove mentions
-    text = re.sub(r'#', '', text)  # Remove hashtags
-    text = re.sub(r'[^A-Za-z\s]', '', text)  # Remove special characters
+    """Remove URLs, mentions, hashtags, and special characters"""
+    text = re.sub(r'http\S+', '', text)
+    text = re.sub(r'@\w+', '', text)
+    text = re.sub(r'#', '', text)
+    text = re.sub(r'[^A-Za-z\s]', '', text)
     return text
 
-# Clean the text column
 df['cleaned_text'] = df['Text'].apply(clean_text)
 
-print("Text cleaning complete!")
-
 # ============================================
-# PART 5: SENTIMENT ANALYSIS (VADER)
+# 4. SENTIMENT ANALYSIS (VADER)
 # ============================================
-
-print("\n=== Performing Sentiment Analysis ===")
-
-# Initialize VADER sentiment analyzer
 analyzer = SentimentIntensityAnalyzer()
 
-# Function to classify sentiment using VADER
 def classify_vader_sentiment(text):
+    """Classify sentiment using VADER compound score"""
     score = analyzer.polarity_scores(text)
     if score['compound'] >= 0.05:
         return 'good'
@@ -356,218 +267,95 @@ def classify_vader_sentiment(text):
     else:
         return 'neutral'
 
-# Apply sentiment analysis
 df['sentiment'] = df['cleaned_text'].apply(classify_vader_sentiment)
 
-print("\nSentiment Analysis Results:")
+print("Sentiment Distribution:")
 print(df['sentiment'].value_counts())
-print("\nSample results:")
-print(df[['cleaned_text', 'sentiment']].head())
 
 # ============================================
-# PART 6: GEOCODING & COORDINATE MAPPING
+# 5. GEOCODING & COORDINATE MAPPING
 # ============================================
-
-print("\n=== Mapping Locations to Coordinates ===")
-
-# Nigerian state coordinates dictionary
 nigerian_coordinates = {
     'LAGOS': (6.5244, 3.3792),
     'JIGAWA': (12.2289, 9.5616),
     'TARABA': (7.9999, 10.7739),
     'BAUCHI': (10.3158, 9.8442),
     'DELTA': (5.8903, 5.6803),
-    'OYO': (7.8451, 3.9470),
-    'EKITI': (7.7190, 5.3110),
-    'BORNO': (11.8333, 13.1500),
-    'ANAMBRA': (6.2209, 6.9370),
-    'ABIA': (5.4527, 7.5248),
-    'EDO': (6.3350, 5.6220),
-    'KWARA': (8.9670, 4.3840),
-    'NASARAWA': (8.5372, 8.3150),
-    'ONDO': (7.2500, 5.1950),
-    'ZAMFARA': (12.1704, 6.6594),
-    'FCT ABUJA': (9.0765, 7.3986),
+    # ... other states
 }
 
-# Map cities to their parent states
-city_to_state_mapping = {
-    'MAKOKO': 'LAGOS',
-    'IBADAN': 'OYO',
-    'BENIN': 'EDO',
-    'BENIN CITY': 'EDO',
-    'ONITSHA': 'ANAMBRA',
-    'ONITSHA, NIGERIA': 'ANAMBRA',
-    'AKURE': 'ONDO',
-    'PORT HARCOURT': 'RIVERS',
-    'KANO CITY': 'KANO',
-    'MAIDUGURI': 'BORNO',
-    'ABUJA': 'FCT ABUJA',
-    'OLUYOLE': 'OYO',
-    'SAUCHI': 'BAUCHI',
-}
-
-# Function to get coordinates for a location
 def get_coordinates(location_str):
+    """Map location names to geographic coordinates"""
     if pd.isna(location_str) or location_str == 'None':
         return (None, None)
     
-    # Extract location from string representation
-    location = eval(location_str)[0] if location_str.startswith('[') else location_str
-    location_upper = location.upper()
-    
-    # Map city to state if needed
-    if location_upper in city_to_state_mapping:
-        location_upper = city_to_state_mapping[location_upper]
-    
-    # Return coordinates if found
-    if location_upper in nigerian_coordinates:
-        return nigerian_coordinates[location_upper]
-    
-    return (None, None)
+    location = location_str.upper()
+    return nigerian_coordinates.get(location, (None, None))
 
-# Apply coordinate mapping
-df['lat_long'] = df['cleaned_locations'].apply(get_coordinates)
-df['latitude'] = df['lat_long'].apply(lambda x: x[0])
-df['longitude'] = df['lat_long'].apply(lambda x: x[1])
-
-# Remove rows without coordinates
-df = df.dropna(subset=['latitude', 'longitude'])
-
-print(f"Successfully mapped {len(df)} tweets to coordinates")
+df['latitude'] = df['cleaned_locations'].apply(lambda x: get_coordinates(x)[0])
+df['longitude'] = df['cleaned_locations'].apply(lambda x: get_coordinates(x)[1])
 
 # ============================================
-# PART 7: STATE-LEVEL AGGREGATION
+# 6. STATE-LEVEL AGGREGATION
 # ============================================
-
-print("\n=== Aggregating Sentiment by State ===")
-
-# Convert sentiment to numerical values
 sentiment_values = {'good': 1, 'neutral': 0, 'bad': -1}
 df['sentiment_value'] = df['sentiment'].map(sentiment_values)
 
-# Group by state and aggregate
 state_sentiment = df.groupby('cleaned_locations').agg({
-    'sentiment': 'count',  # Count of mentions
-    'sentiment_value': 'mean',  # Average sentiment
+    'sentiment': 'count',
+    'sentiment_value': 'mean',
     'latitude': 'first',
     'longitude': 'first'
 }).reset_index()
 
-# Convert average sentiment back to categories
-def sentiment_from_value(value):
-    if value > 0:
-        return 'good'
-    elif value < 0:
-        return 'bad'
-    else:
-        return 'neutral'
-
-state_sentiment['average_sentiment'] = state_sentiment['sentiment_value'].apply(sentiment_from_value)
 state_sentiment.rename(columns={'sentiment': 'mention_count'}, inplace=True)
 
-print("\nState-level sentiment summary:")
-print(state_sentiment[['cleaned_locations', 'mention_count', 'average_sentiment']].head(10))
-
 # ============================================
-# PART 8: INTERACTIVE MAP VISUALIZATION
+# 7. INTERACTIVE MAP VISUALIZATION
 # ============================================
-
-print("\n=== Creating Interactive Sentiment Map ===")
-
-# Create base map centered on Nigeria
 m = folium.Map(location=[9.0820, 8.6753], zoom_start=6, tiles='OpenStreetMap')
 
-# Define color mapping for sentiment
 sentiment_colors = {
-    'good': '#27ae60',    # Green
-    'neutral': '#f39c12',  # Orange
-    'bad': '#e74c3c'       # Red
-}
-
-sentiment_icons = {
-    'good': '😊',
-    'neutral': '😐',
-    'bad': '😟'
+    'good': '#27ae60',
+    'neutral': '#f39c12',
+    'bad': '#e74c3c'
 }
 
 # Add markers for each state
 for idx, row in state_sentiment.iterrows():
     sentiment = row['average_sentiment']
     color = sentiment_colors[sentiment]
-    icon = sentiment_icons[sentiment]
     
-    # Create popup content
     popup_html = f"""
     <div style='font-family: Arial; width: 250px;'>
-        <h4 style='margin: 0; color: {color};'>
-            📍 {row['cleaned_locations']}
-        </h4>
-        <hr style='margin: 5px 0;'>
-        <p style='margin: 5px 0;'>
-            <b>Overall Sentiment:</b> {sentiment.upper()} {icon}<br>
-            <b>Total Mentions:</b> {row['mention_count']}<br>
-            <b>Sentiment Intensity:</b> {abs(row['sentiment_value']):.2f}
+        <h4>📍 {row['cleaned_locations']}</h4>
+        <p>
+            <b>Sentiment:</b> {sentiment.upper()}<br>
+            <b>Mentions:</b> {row['mention_count']}<br>
+            <b>Intensity:</b> {abs(row['sentiment_value']):.2f}
         </p>
     </div>
     """
     
-    # Add marker to map
     folium.Marker(
         location=[row['latitude'], row['longitude']],
         popup=folium.Popup(popup_html, max_width=300),
-        tooltip=f"{row['cleaned_locations']}: {sentiment.upper()}",
         icon=folium.Icon(color='red' if sentiment == 'bad' else 
-                        'orange' if sentiment == 'neutral' else 'green',
-                        icon='info-sign')
+                        'orange' if sentiment == 'neutral' else 'green')
     ).add_to(m)
 
-# Save the map
 m.save('malaria_sentiment_map.html')
-print("\nInteractive map saved as 'malaria_sentiment_map.html'")
 
 # ============================================
-# ANALYSIS SUMMARY
+# 8. ANALYSIS SUMMARY
 # ============================================
-
-print("\n" + "="*60)
-print("NIGERIA MALARIA SENTIMENT ANALYSIS SUMMARY")
-print("="*60)
-
-total_states = len(state_sentiment)
-total_mentions = state_sentiment['mention_count'].sum()
-avg_per_state = round(total_mentions / total_states, 1)
-
-positive_states = len(state_sentiment[state_sentiment['average_sentiment'] == 'good'])
-neutral_states = len(state_sentiment[state_sentiment['average_sentiment'] == 'neutral'])
-negative_states = len(state_sentiment[state_sentiment['average_sentiment'] == 'bad'])
-
-most_discussed = state_sentiment.loc[state_sentiment['mention_count'].idxmax(), 'cleaned_locations']
-most_discussed_count = state_sentiment['mention_count'].max()
-
-# States needing attention (negative sentiment)
-attention_states = state_sentiment[state_sentiment['average_sentiment'] == 'bad']['cleaned_locations'].tolist()
-
-print(f"\n📊 OVERVIEW:")
-print(f"   • Total States Analyzed: {total_states}")
-print(f"   • Total Mentions: {total_mentions}")
-print(f"   • Average per State: {avg_per_state}")
-
-print(f"\n😊 SENTIMENT DISTRIBUTION:")
-print(f"   • Positive Sentiment: {positive_states} states ({positive_states/total_states*100:.0f}%)")
-print(f"   • Neutral Sentiment: {neutral_states} states ({neutral_states/total_states*100:.0f}%)")
-print(f"   • Negative Sentiment: {negative_states} states ({negative_states/total_states*100:.0f}%)")
-
-print(f"\n📍 MOST DISCUSSED:")
-print(f"   • {most_discussed}: {most_discussed_count} mentions")
-
-print(f"\n🚨 STATES NEEDING ATTENTION (Negative Sentiment):")
-for state in attention_states:
-    print(f"   • {state}")
-
-print("\n" + "="*60)
-print("Analysis completed successfully!")
-print("="*60)
+print("\n📊 ANALYSIS SUMMARY")
+print(f"Total States: {len(state_sentiment)}")
+print(f"Total Mentions: {state_sentiment['mention_count'].sum()}")
+print(f"\nSentiment Distribution:")
+print(f"Positive: {len(state_sentiment[state_sentiment['average_sentiment']=='good'])} states")
+print(f"Neutral: {len(state_sentiment[state_sentiment['average_sentiment']=='neutral'])} states")
+print(f"Negative: {len(state_sentiment[state_sentiment['average_sentiment']=='bad'])} states")
 </code></pre>
             </div>
         </div>
