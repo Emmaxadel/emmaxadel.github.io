@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nigeria Malaria Sentiment Analysis - Twitter Data Analysis & Geospatial Visualization">
+    <title>Malaria Sentiment Analysis | Emmanuel Adeleye</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Emmanuel Adeleye</div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <a href="index.html#projects" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <h1 class="project-title-main">Nigeria Malaria Sentiment Analysis</h1>
+            <p class="project-subtitle">Geospatial Sentiment Analysis using Twitter Data & Python</p>
+            <div class="project-meta">
+                <span><i class="fas fa-calendar"></i> January 2026</span>
+                <span><i class="fas fa-tag"></i> Data Science, NLP, Geospatial Analysis</span>
+            </div>
+            <div class="project-external-links">
+                <a href="https://github.com/Emmaxadel/tweet-analysis" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                <a href="https://github.com/Emmaxadel/tweet-analysis/blob/main/enhanced_sentiment_map_with_report_nigeria.html" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-map-marked-alt"></i> View Interactive Map
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-section">
+        <div class="container">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="project-overview-content">
+                <p>
+                    This project presents a comprehensive sentiment analysis of malaria-related discussions on Twitter
+                    across Nigeria. By scraping tweets from major Nigerian news outlets and applying natural language
+                    processing techniques, the analysis identifies malaria hotspots and public sentiment patterns across
+                    16 Nigerian states. The project combines web scraping, NLP, sentiment analysis, and geospatial
+                    visualization to provide actionable insights for public health decision-making.
+                </p>
+                <h3>Key Objectives</h3>
+                <ul>
+                    <li>Scrape and analyze malaria-related tweets from major Nigerian news sources</li>
+                    <li>Extract location data and perform named entity recognition (NER) on tweet content</li>
+                    <li>Conduct sentiment analysis using VADER to classify public sentiment</li>
+                    <li>Create interactive geospatial visualizations showing sentiment distribution across Nigeria</li>
+                    <li>Identify states requiring urgent public health attention based on negative sentiment</li>
+                    <li>Provide data-driven recommendations for malaria prevention and intervention programs</li>
+                </ul>
+                <h3>Technologies Used</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                    <span class="tech-badge"><i class="fas fa-brain"></i> NLTK</span>
+                    <span class="tech-badge"><i class="fas fa-comment-dots"></i> VADER Sentiment</span>
+                    <span class="tech-badge"><i class="fas fa-table"></i> Pandas</span>
+                    <span class="tech-badge"><i class="fas fa-map"></i> Folium</span>
+                    <span class="tech-badge"><i class="fab fa-twitter"></i> Twikit</span>
+                    <span class="tech-badge"><i class="fas fa-database"></i> Data Cleaning</span>
+                    <span class="tech-badge"><i class="fas fa-globe-americas"></i> Geospatial Analysis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section class="project-section dashboard-section">
+        <div class="container">
+            <h2 class="section-title">Interactive Sentiment Map</h2>
+            <p class="dashboard-description">
+                The interactive map below visualizes malaria-related sentiment across 16 Nigerian states based on 
+                Twitter data analysis. States are color-coded by sentiment (green for positive, orange for neutral, 
+                red for negative), with detailed statistics available for each location. Click on state markers 
+                to explore sentiment intensity, mention counts, and key findings.
+            </p>
+            <div class="dashboard-container" style="text-align: center; padding: 40px;">
+                <a href="https://github.com/Emmaxadel/tweet-analysis/blob/main/enhanced_sentiment_map_with_report_nigeria.html" 
+                   target="_blank" 
+                   class="btn btn-primary" 
+                   style="font-size: 18px; padding: 15px 30px;">
+                    <i class="fas fa-map-marked-alt"></i> View Full Interactive Map
+                </a>
+                <p style="margin-top: 20px; color: #666;">
+                    <i class="fas fa-info-circle"></i> The interactive map opens in a new window with full features including 
+                    state-level sentiment details, zoom controls, and comprehensive analysis summary.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Insights -->
+    <section class="project-section insights-section">
+        <div class="container">
+            <h2 class="section-title">Key Insights & Findings</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Geographic Coverage</h3>
+                    <p>Analyzed 34 malaria-related mentions across 16 Nigerian states, with an average of 2.1 mentions per state, revealing widespread public discourse about malaria.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Sentiment Distribution</h3>
+                    <p>5 states showed positive sentiment (31%), 6 states neutral (38%), and 5 states negative (31%), indicating mixed public perception of malaria situation.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Critical Hotspots</h3>
+                    <p>Lagos (7 mentions), Delta, Taraba, and Bauchi showed negative sentiment patterns, requiring immediate public health intervention and awareness campaigns.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>Positive Indicators</h3>
+                    <p>Jigawa (4 mentions), Oyo, Ekiti, Borno, and Anambra demonstrated positive sentiment, suggesting successful malaria prevention programs in these regions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="project-section">
+        <div class="container">
+            <h2 class="section-title">Methodology & Workflow</h2>
+            <div class="project-overview-content">
+                <h3>1. Data Collection</h3>
+                <p>
+                    Utilized the Twikit library to scrape tweets containing keywords "malaria," "mosquito," or "mosquitoes" 
+                    from major Nigerian news outlets (Punch Newspapers, The Nation, Guardian Nigeria, Nigerian Tribune, 
+                    Vanguard, Daily Post, The Sun Nigeria) from September 2023 onwards. Collected over 5,000 tweets with 
+                    comprehensive metadata including timestamps, likes, retweets, and location data.
+                </p>
+                
+                <h3>2. Named Entity Recognition & Location Extraction</h3>
+                <p>
+                    Applied NLTK's natural language processing capabilities to extract location entities from tweet text. 
+                    Implemented custom filtering to remove irrelevant terms and mapped cities to their parent Nigerian states. 
+                    Normalized location names and handled variations (e.g., "Lagos State" → "LAGOS").
+                </p>
+                
+                <h3>3. Sentiment Analysis</h3>
+                <p>
+                    Employed VADER (Valence Aware Dictionary and sEntiment Reasoner) sentiment analyzer to classify tweets 
+                    as positive (compound score ≥ 0.05), negative (≤ -0.05), or neutral. Preprocessed text by removing URLs, 
+                    mentions, hashtags, and special characters to improve analysis accuracy.
+                </p>
+                
+                <h3>4. Geospatial Visualization</h3>
+                <p>
+                    Created interactive maps using Folium library, centered on Nigeria (9.0820°N, 8.6753°E). Aggregated 
+                    sentiment scores at state level and visualized using color-coded markers (green = positive, orange = neutral, 
+                    red = negative) with custom popups displaying sentiment intensity, mention counts, and detailed statistics.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Python Code Analysis -->
+    <section class="project-section code-section">
+        <div class="container">
+            <h2 class="section-title">Python Analysis Code</h2>
+            <p class="code-description">
+                Below is the Python code demonstrating the complete workflow: web scraping, NER, sentiment analysis, 
+                and geospatial visualization. The code showcases data preprocessing, VADER sentiment classification, 
+                and interactive map generation using Folium.
+            </p>
+            
+            <div class="code-container">
+                <div class="code-header">
+                    <span><i class="fab fa-python"></i> Python</span>
+                    <button class="copy-btn" onclick="copyCode()">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                </div>
+                <pre class="code-block"><code class="language-python" id="python-code"># Nigeria Malaria Sentiment Analysis - Python Code
+# Twitter Data Scraping, NLP, and Geospatial Visualization
+
+import pandas as pd
+import nltk
+from nltk import ne_chunk, pos_tag, word_tokenize
+from nltk.tree import Tree
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import folium
+from folium.plugins import MarkerCluster
+import re
+
+# ============================================
+# PART 1: DATA COLLECTION (Twitter Scraping)
+# ============================================
+
+from twikit import Client, TooManyRequests
+import time
+from datetime import datetime
+import csv
+from configparser import ConfigParser
+
+# Query configuration
+QUERY = '(malaria OR mosquito OR mosquitoes) (from:MobilePunch OR from:TheNationNews OR from:GuardianNigeria OR from:nigeriantribune OR from:vanguardngrnews OR from:DailyPostNGR OR from:thesunnigeria) since:2023-09-01'
+
+# Authenticate to Twitter
+client = Client(language='en-US')
+# Login credentials loaded from config file
+# client.login(auth_info_1=username, auth_info_2=email, password=password)
+
+print("Scraping malaria-related tweets from Nigerian news sources...")
+
+# ============================================
+# PART 2: LOAD AND EXPLORE DATA
+# ============================================
+
+# Load scraped Twitter data
+df = pd.read_csv("twitter_data.csv")
+print(f"Dataset loaded: {df.shape[0]} tweets")
+print("\nFirst few rows:")
+print(df.head())
+
+# Check for missing values
+print("\nMissing values:")
+print(df.isnull().sum())
+
+# ============================================
+# PART 3: LOCATION EXTRACTION (NER)
+# ============================================
+
+print("\n=== Extracting Location Entities ===")
+
+# Function to extract locations using NLTK's NER
+def extract_locations(text):
+    try:
+        tokens = word_tokenize(text)
+        pos_tags = pos_tag(tokens)
+        chunks = ne_chunk(pos_tags, binary=False)
+        
+        locations = []
+        for chunk in chunks:
+            if isinstance(chunk, Tree) and chunk.label() == 'GPE':
+                locations.append(' '.join([token for token, pos in chunk.leaves()]))
+        return locations
+    except:
+        return []
+
+# Apply location extraction
+df['extracted_locations'] = df['Text'].apply(extract_locations)
+
+# List of irrelevant terms to filter out
+irrelevant_terms = {
+    "malaria", "mosquitoes", "mosquito", "untreatable", "n20bn", 
+    "burna", "yhemolee", "nddc", "otedola", "ui", "us", 
+    "east africa", "kenya"
+}
+
+# Function to clean extracted locations
+def clean_locations(locations):
+    clean_locs = []
+    for loc in locations:
+        # Ignore irrelevant terms
+        if loc.lower() in irrelevant_terms:
+            continue
+        
+        # Ignore URLs
+        if re.match(r"http[s]?://", loc):
+            continue
+        
+        # Ignore single characters
+        if len(loc) <= 1:
+            continue
+        
+        # Add cleaned location
+        clean_locs.append(loc)
+    
+    return clean_locs if clean_locs else None
+
+# Clean the extracted locations
+df['cleaned_locations'] = df['extracted_locations'].apply(clean_locations)
+
+# Handle location variations and normalize
+df['cleaned_locations'] = df['cleaned_locations'].astype(str)
+df['cleaned_locations'].replace({
+    "Lagos, Nigeria": "['Lagos']", 
+    "['Lagos, Nigeria']": "['Lagos']"
+}, inplace=True)
+
+# Convert to uppercase for consistency
+df['cleaned_locations'] = df['cleaned_locations'].str.upper()
+
+print("\nLocation extraction complete!")
+print(f"Found locations in {df['cleaned_locations'].notna().sum()} tweets")
+
+# ============================================
+# PART 4: TEXT CLEANING
+# ============================================
+
+print("\n=== Cleaning Tweet Text ===")
+
+# Function to clean tweet text
+def clean_text(text):
+    text = re.sub(r'http\S+', '', text)  # Remove URLs
+    text = re.sub(r'@\w+', '', text)  # Remove mentions
+    text = re.sub(r'#', '', text)  # Remove hashtags
+    text = re.sub(r'[^A-Za-z\s]', '', text)  # Remove special characters
+    return text
+
+# Clean the text column
+df['cleaned_text'] = df['Text'].apply(clean_text)
+
+print("Text cleaning complete!")
+
+# ============================================
+# PART 5: SENTIMENT ANALYSIS (VADER)
+# ============================================
+
+print("\n=== Performing Sentiment Analysis ===")
+
+# Initialize VADER sentiment analyzer
+analyzer = SentimentIntensityAnalyzer()
+
+# Function to classify sentiment using VADER
+def classify_vader_sentiment(text):
+    score = analyzer.polarity_scores(text)
+    if score['compound'] >= 0.05:
+        return 'good'
+    elif score['compound'] <= -0.05:
+        return 'bad'
+    else:
+        return 'neutral'
+
+# Apply sentiment analysis
+df['sentiment'] = df['cleaned_text'].apply(classify_vader_sentiment)
+
+print("\nSentiment Analysis Results:")
+print(df['sentiment'].value_counts())
+print("\nSample results:")
+print(df[['cleaned_text', 'sentiment']].head())
+
+# ============================================
+# PART 6: GEOCODING & COORDINATE MAPPING
+# ============================================
+
+print("\n=== Mapping Locations to Coordinates ===")
+
+# Nigerian state coordinates dictionary
+nigerian_coordinates = {
+    'LAGOS': (6.5244, 3.3792),
+    'JIGAWA': (12.2289, 9.5616),
+    'TARABA': (7.9999, 10.7739),
+    'BAUCHI': (10.3158, 9.8442),
+    'DELTA': (5.8903, 5.6803),
+    'OYO': (7.8451, 3.9470),
+    'EKITI': (7.7190, 5.3110),
+    'BORNO': (11.8333, 13.1500),
+    'ANAMBRA': (6.2209, 6.9370),
+    'ABIA': (5.4527, 7.5248),
+    'EDO': (6.3350, 5.6220),
+    'KWARA': (8.9670, 4.3840),
+    'NASARAWA': (8.5372, 8.3150),
+    'ONDO': (7.2500, 5.1950),
+    'ZAMFARA': (12.1704, 6.6594),
+    'FCT ABUJA': (9.0765, 7.3986),
+}
+
+# Map cities to their parent states
+city_to_state_mapping = {
+    'MAKOKO': 'LAGOS',
+    'IBADAN': 'OYO',
+    'BENIN': 'EDO',
+    'BENIN CITY': 'EDO',
+    'ONITSHA': 'ANAMBRA',
+    'ONITSHA, NIGERIA': 'ANAMBRA',
+    'AKURE': 'ONDO',
+    'PORT HARCOURT': 'RIVERS',
+    'KANO CITY': 'KANO',
+    'MAIDUGURI': 'BORNO',
+    'ABUJA': 'FCT ABUJA',
+    'OLUYOLE': 'OYO',
+    'SAUCHI': 'BAUCHI',
+}
+
+# Function to get coordinates for a location
+def get_coordinates(location_str):
+    if pd.isna(location_str) or location_str == 'None':
+        return (None, None)
+    
+    # Extract location from string representation
+    location = eval(location_str)[0] if location_str.startswith('[') else location_str
+    location_upper = location.upper()
+    
+    # Map city to state if needed
+    if location_upper in city_to_state_mapping:
+        location_upper = city_to_state_mapping[location_upper]
+    
+    # Return coordinates if found
+    if location_upper in nigerian_coordinates:
+        return nigerian_coordinates[location_upper]
+    
+    return (None, None)
+
+# Apply coordinate mapping
+df['lat_long'] = df['cleaned_locations'].apply(get_coordinates)
+df['latitude'] = df['lat_long'].apply(lambda x: x[0])
+df['longitude'] = df['lat_long'].apply(lambda x: x[1])
+
+# Remove rows without coordinates
+df = df.dropna(subset=['latitude', 'longitude'])
+
+print(f"Successfully mapped {len(df)} tweets to coordinates")
+
+# ============================================
+# PART 7: STATE-LEVEL AGGREGATION
+# ============================================
+
+print("\n=== Aggregating Sentiment by State ===")
+
+# Convert sentiment to numerical values
+sentiment_values = {'good': 1, 'neutral': 0, 'bad': -1}
+df['sentiment_value'] = df['sentiment'].map(sentiment_values)
+
+# Group by state and aggregate
+state_sentiment = df.groupby('cleaned_locations').agg({
+    'sentiment': 'count',  # Count of mentions
+    'sentiment_value': 'mean',  # Average sentiment
+    'latitude': 'first',
+    'longitude': 'first'
+}).reset_index()
+
+# Convert average sentiment back to categories
+def sentiment_from_value(value):
+    if value > 0:
+        return 'good'
+    elif value < 0:
+        return 'bad'
+    else:
+        return 'neutral'
+
+state_sentiment['average_sentiment'] = state_sentiment['sentiment_value'].apply(sentiment_from_value)
+state_sentiment.rename(columns={'sentiment': 'mention_count'}, inplace=True)
+
+print("\nState-level sentiment summary:")
+print(state_sentiment[['cleaned_locations', 'mention_count', 'average_sentiment']].head(10))
+
+# ============================================
+# PART 8: INTERACTIVE MAP VISUALIZATION
+# ============================================
+
+print("\n=== Creating Interactive Sentiment Map ===")
+
+# Create base map centered on Nigeria
+m = folium.Map(location=[9.0820, 8.6753], zoom_start=6, tiles='OpenStreetMap')
+
+# Define color mapping for sentiment
+sentiment_colors = {
+    'good': '#27ae60',    # Green
+    'neutral': '#f39c12',  # Orange
+    'bad': '#e74c3c'       # Red
+}
+
+sentiment_icons = {
+    'good': '😊',
+    'neutral': '😐',
+    'bad': '😟'
+}
+
+# Add markers for each state
+for idx, row in state_sentiment.iterrows():
+    sentiment = row['average_sentiment']
+    color = sentiment_colors[sentiment]
+    icon = sentiment_icons[sentiment]
+    
+    # Create popup content
+    popup_html = f"""
+    <div style='font-family: Arial; width: 250px;'>
+        <h4 style='margin: 0; color: {color};'>
+            📍 {row['cleaned_locations']}
+        </h4>
+        <hr style='margin: 5px 0;'>
+        <p style='margin: 5px 0;'>
+            <b>Overall Sentiment:</b> {sentiment.upper()} {icon}<br>
+            <b>Total Mentions:</b> {row['mention_count']}<br>
+            <b>Sentiment Intensity:</b> {abs(row['sentiment_value']):.2f}
+        </p>
+    </div>
+    """
+    
+    # Add marker to map
+    folium.Marker(
+        location=[row['latitude'], row['longitude']],
+        popup=folium.Popup(popup_html, max_width=300),
+        tooltip=f"{row['cleaned_locations']}: {sentiment.upper()}",
+        icon=folium.Icon(color='red' if sentiment == 'bad' else 
+                        'orange' if sentiment == 'neutral' else 'green',
+                        icon='info-sign')
+    ).add_to(m)
+
+# Save the map
+m.save('malaria_sentiment_map.html')
+print("\nInteractive map saved as 'malaria_sentiment_map.html'")
+
+# ============================================
+# ANALYSIS SUMMARY
+# ============================================
+
+print("\n" + "="*60)
+print("NIGERIA MALARIA SENTIMENT ANALYSIS SUMMARY")
+print("="*60)
+
+total_states = len(state_sentiment)
+total_mentions = state_sentiment['mention_count'].sum()
+avg_per_state = round(total_mentions / total_states, 1)
+
+positive_states = len(state_sentiment[state_sentiment['average_sentiment'] == 'good'])
+neutral_states = len(state_sentiment[state_sentiment['average_sentiment'] == 'neutral'])
+negative_states = len(state_sentiment[state_sentiment['average_sentiment'] == 'bad'])
+
+most_discussed = state_sentiment.loc[state_sentiment['mention_count'].idxmax(), 'cleaned_locations']
+most_discussed_count = state_sentiment['mention_count'].max()
+
+# States needing attention (negative sentiment)
+attention_states = state_sentiment[state_sentiment['average_sentiment'] == 'bad']['cleaned_locations'].tolist()
+
+print(f"\n📊 OVERVIEW:")
+print(f"   • Total States Analyzed: {total_states}")
+print(f"   • Total Mentions: {total_mentions}")
+print(f"   • Average per State: {avg_per_state}")
+
+print(f"\n😊 SENTIMENT DISTRIBUTION:")
+print(f"   • Positive Sentiment: {positive_states} states ({positive_states/total_states*100:.0f}%)")
+print(f"   • Neutral Sentiment: {neutral_states} states ({neutral_states/total_states*100:.0f}%)")
+print(f"   • Negative Sentiment: {negative_states} states ({negative_states/total_states*100:.0f}%)")
+
+print(f"\n📍 MOST DISCUSSED:")
+print(f"   • {most_discussed}: {most_discussed_count} mentions")
+
+print(f"\n🚨 STATES NEEDING ATTENTION (Negative Sentiment):")
+for state in attention_states:
+    print(f"   • {state}")
+
+print("\n" + "="*60)
+print("Analysis completed successfully!")
+print("="*60)
+</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="project-section recommendations-section">
+        <div class="container">
+            <h2 class="section-title">Public Health Recommendations</h2>
+            <div class="recommendations-list">
+                <div class="recommendation-item">
+                    <div class="recommendation-number">01</div>
+                    <div class="recommendation-content">
+                        <h3>Targeted Intervention for High-Risk States</h3>
+                        <p>Prioritize malaria prevention programs in Lagos, Delta, Taraba, and Bauchi based on negative sentiment patterns. Deploy additional mosquito nets, conduct awareness campaigns, and increase healthcare facility capacity in these states.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-number">02</div>
+                    <div class="recommendation-content">
+                        <h3>Best Practice Replication</h3>
+                        <p>Study and replicate successful malaria prevention strategies from Jigawa, Oyo, and Ekiti (positive sentiment states) to other regions. Document effective community engagement, distribution methods, and healthcare protocols.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-number">03</div>
+                    <div class="recommendation-content">
+                        <h3>Social Media Monitoring System</h3>
+                        <p>Establish a real-time social media monitoring system to track malaria discourse, identify emerging hotspots early, and respond rapidly to public concerns. Use sentiment trends as early warning indicators.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-number">04</div>
+                    <div class="recommendation-content">
+                        <h3>Public Awareness Campaign</h3>
+                        <p>Launch targeted information campaigns in states with neutral sentiment to shift public perception toward positive action. Focus on prevention education, treatment availability, and success stories from high-performing states.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item">
+                    <div class="recommendation-number">05</div>
+                    <div class="recommendation-content">
+                        <h3>Seasonal Preparedness</h3>
+                        <p>Analyze temporal patterns in malaria discussions to prepare for seasonal spikes. Pre-position resources and intensify prevention measures during rainy seasons when mosquito populations increase.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Challenges -->
+    <section class="project-section">
+        <div class="container">
+            <h2 class="section-title">Technical Challenges & Solutions</h2>
+            <div class="project-overview-content">
+                <div class="insight-card">
+                    <h3><i class="fas fa-database"></i> Data Collection Rate Limits</h3>
+                    <p><strong>Challenge:</strong> Twitter API rate limits restricted data collection speed.</p>
+                    <p><strong>Solution:</strong> Implemented intelligent wait mechanisms and retry logic to handle TooManyRequests exceptions, ensuring continuous data collection without API violations.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h3><i class="fas fa-map-pin"></i> Location Ambiguity</h3>
+                    <p><strong>Challenge:</strong> Many tweets lacked explicit location information or contained ambiguous references.</p>
+                    <p><strong>Solution:</strong> Combined profile location data with NER-extracted locations, created comprehensive city-to-state mappings, and filtered irrelevant terms to improve accuracy.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h3><i class="fas fa-brain"></i> Sentiment Context Sensitivity</h3>
+                    <p><strong>Challenge:</strong> Medical discussions can be contextually complex, requiring nuanced sentiment interpretation.</p>
+                    <p><strong>Solution:</strong> Used VADER's compound score with carefully calibrated thresholds (±0.05) to distinguish between genuinely positive/negative content and neutral medical reporting.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h3><i class="fas fa-chart-area"></i> State-Level Aggregation</h3>
+                    <p><strong>Challenge:</strong> Aggregating individual tweets to state-level insights while preserving sentiment nuances.</p>
+                    <p><strong>Solution:</strong> Implemented weighted averaging of sentiment scores, tracking both mention counts and sentiment intensity to provide comprehensive state-level assessments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Emmanuel Adeleye. All rights reserved.</p>
+            <p>Built with passion for data science and public health.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script>
+        function copyCode() {
+            const code = document.getElementById('python-code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
